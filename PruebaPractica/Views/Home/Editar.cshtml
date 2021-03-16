@@ -1,0 +1,78 @@
+﻿@using PruebaPractica.Models
+@model UsuarioCLS
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar</h2>
+
+<div class="row">
+    <div class="col-md-6">
+
+        @using (Html.BeginForm("Editar", "Home", FormMethod.Post, new { @id = "EditarDato" }))
+        {
+            <div>
+                @Html.LabelFor(p => p.Id)
+                @Html.TextBoxFor(p => p.Id, new { @class = "form-control", @readOnly = true })
+                @Html.ValidationMessage("Id", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(p => p.Nombre)
+                @Html.TextBoxFor(p => p.Nombre, new { @class = "form-control" })
+                @Html.ValidationMessage("Nombre", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(p => p.Apellidos)
+                @Html.TextBoxFor(p => p.Apellidos, new { @class = "form-control" })
+                @Html.ValidationMessage("Apellidos", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(p => p.FechaNacimiento)
+                @Html.EditorFor(p => p.FechaNacimiento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("FechaNacimiento", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(p => p.TelefonoCelular)
+                @Html.TextBoxFor(p => p.TelefonoCelular, new { @class = "form-control" })
+                @Html.ValidationMessage("TelefonoCelular", new { @class = "text-danger" })
+            </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Editar
+            </button>
+            @Html.ActionLink("Cancelar", "Index", "Home", null, new { @class = "btn btn-danger" })
+        }
+
+    </div>
+</div>
+
+<!-- Modal boostrap -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">¿Desea guardar los cambios?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div style="padding:1em">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="Guardar()" class="btn btn-info">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // se envia los datos al controlador por metodo POST//
+    function Guardar() {
+        var EditarDato = document.getElementById("EditarDato");
+        EditarDato.submit();
+    }
+</script>
+
